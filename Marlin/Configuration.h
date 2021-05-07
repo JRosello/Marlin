@@ -71,7 +71,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(StoneAxeCommander)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(CR10S SKR, BLTOUCH, DualZ)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -92,7 +92,7 @@
 #define SHOW_CUSTOM_BOOTSCREEN
 
 // Show the bitmap in Marlin/_Statusscreen.h on the status screen.
-#define CUSTOM_STATUS_SCREEN_IMAGE
+//#define CUSTOM_STATUS_SCREEN_IMAGE
 
 // @section machine
 
@@ -137,7 +137,7 @@
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
-#define MACHINE_UUID "cede2a2f-41a2-4748-9b12-c55c62f367ff"
+#define MACHINE_UUID "cf79a49d-7fa3-4325-ba58-28baa9c4dc38"
 
 // @section extruder
 
@@ -467,7 +467,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 275
+#define HEATER_0_MAXTEMP 280
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -475,7 +475,7 @@
 #define HEATER_5_MAXTEMP 275
 #define HEATER_6_MAXTEMP 275
 #define HEATER_7_MAXTEMP 275
-#define BED_MAXTEMP      125
+#define BED_MAXTEMP      120
 #define CHAMBER_MAXTEMP  60
 
 /**
@@ -513,9 +513,9 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp  22.20
-    #define DEFAULT_Ki   1.08
-    #define DEFAULT_Kd 114.00
+    #define DEFAULT_Kp  19.6784
+    #define DEFAULT_Ki   1.4271
+    #define DEFAULT_Kd  67.8364
   #endif
 #endif // PIDTEMP
 
@@ -743,7 +743,7 @@
 #define Z_DRIVER_TYPE  TMC2209
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
-//#define Z2_DRIVER_TYPE A4988
+#define Z2_DRIVER_TYPE TMC2209
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
 #define E0_DRIVER_TYPE TMC2209
@@ -801,7 +801,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 95 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 470 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -885,7 +885,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -901,7 +901,8 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+//------------------------------------------>>>>>>>>>>>>>>original activat!!!
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -958,7 +959,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#define BLTOUCH
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -1050,14 +1051,14 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { -53, -13, 0 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 10
+#define PROBING_MARGIN 20
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (133*60)
+#define XY_PROBE_FEEDRATE (160*60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST (8*60)
@@ -1227,15 +1228,15 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 296 // Nozzle is at X4 when homed
-#define Y_BED_SIZE 298 // Nozzle is at Y2 when homed
+#define X_BED_SIZE 300 // Nozzle is at X4 when homed - Original 296
+#define Y_BED_SIZE 300 // Nozzle is at Y2 when homed - Original 298
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 4
 #define Y_MIN_POS 2
 #define Z_MIN_POS 0
 #define X_MAX_POS 319 // 15mm Extra space on the right end
-#define Y_MAX_POS 306 // 4mm Extra space behind the bed
+#define Y_MAX_POS 310 // 4mm Extra space behind the bed - Original 306
 #define Z_MAX_POS 400
 
 /**
@@ -1280,7 +1281,7 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-#define FILAMENT_RUNOUT_SENSOR
+//#define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
@@ -1392,7 +1393,7 @@
  * leveling immediately after G28.
  */
 //#define RESTORE_LEVELING_AFTER_G28
-//#define ENABLE_LEVELING_AFTER_G28
+#define ENABLE_LEVELING_AFTER_G28
 
 /**
  * Auto-leveling needs preheating
@@ -1435,12 +1436,12 @@
    */
   #define G26_MESH_VALIDATION   // Enable G26 mesh validation
   #if ENABLED(G26_MESH_VALIDATION)
-    #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
+    #define MESH_TEST_NOZZLE_SIZE    0.6  // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for G26.
-    #define MESH_TEST_HOTEND_TEMP  205    // (°C) Default nozzle temperature for G26.
-    #define MESH_TEST_BED_TEMP      60    // (°C) Default bed temperature for G26.
-    #define G26_XY_FEEDRATE         20    // (mm/s) Feedrate for G26 XY moves.
-    #define G26_XY_FEEDRATE_TRAVEL 100    // (mm/s) Feedrate for G26 XY travel moves.
+    #define MESH_TEST_HOTEND_TEMP  215    // (°C) Default nozzle temperature for G26.
+    #define MESH_TEST_BED_TEMP      65    // (°C) Default bed temperature for G26.
+    #define G26_XY_FEEDRATE         25    // (mm/s) Feedrate for G26 XY moves.
+    #define G26_XY_FEEDRATE_TRAVEL 125    // (mm/s) Feedrate for G26 XY travel moves.
     #define G26_RETRACT_MULTIPLIER   1.0  // G26 Q (retraction) used by default between mesh test elements.
   #endif
 
@@ -1449,7 +1450,7 @@
 #if EITHER(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 3
+  #define GRID_MAX_POINTS_X 4
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Probe along the Y axis, advancing X after each column
@@ -1459,7 +1460,7 @@
 
     // Beyond the probed grid, continue the implied tilt?
     // Default is to maintain the height of the nearest edge.
-    //#define EXTRAPOLATE_BEYOND_GRID
+    #define EXTRAPOLATE_BEYOND_GRID
 
     //
     // Experimental Subdivision of the grid by Catmull-Rom method.
@@ -1699,28 +1700,28 @@
 // Preheat Constants - Up to 5 are supported without changes
 //
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 185
-#define PREHEAT_1_TEMP_BED     45
+#define PREHEAT_1_TEMP_HOTEND 213
+#define PREHEAT_1_TEMP_BED     65
 #define PREHEAT_1_TEMP_CHAMBER 35
-#define PREHEAT_1_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_1_FAN_SPEED   0 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "ABS"
-#define PREHEAT_2_TEMP_HOTEND 240
-#define PREHEAT_2_TEMP_BED    110
-#define PREHEAT_2_TEMP_CHAMBER 35
-#define PREHEAT_2_FAN_SPEED   255 // Value from 0 to 255
+//#define PREHEAT_2_LABEL       "ABS"
+//#define PREHEAT_2_TEMP_HOTEND 240
+//#define PREHEAT_2_TEMP_BED    110
+//#define PREHEAT_2_TEMP_CHAMBER 35
+//#define PREHEAT_2_FAN_SPEED   0 // Value from 0 to 255
 
 #define PREHEAT_3_LABEL       "PETG"
-#define PREHEAT_3_TEMP_HOTEND 220
-#define PREHEAT_3_TEMP_BED     45
+#define PREHEAT_3_TEMP_HOTEND 240
+#define PREHEAT_3_TEMP_BED     75
 #define PREHEAT_3_TEMP_CHAMBER 35
-#define PREHEAT_3_FAN_SPEED   255 // Value from 0 to 255
+#define PREHEAT_3_FAN_SPEED     0 // Value from 0 to 255
 
-#define PREHEAT_4_LABEL       "Nylon"
-#define PREHEAT_4_TEMP_HOTEND 230
-#define PREHEAT_4_TEMP_BED    45
-#define PREHEAT_4_TEMP_CHAMBER 35
-#define PREHEAT_4_FAN_SPEED   255 // Value from 0 to 255
+//#define PREHEAT_4_LABEL       "Nylon"
+//#define PREHEAT_4_TEMP_HOTEND 230
+//#define PREHEAT_4_TEMP_BED    45
+//#define PREHEAT_4_TEMP_CHAMBER 35
+//#define PREHEAT_4_FAN_SPEED   255 // Value from 0 to 255
 
 /**
  * Nozzle Park
@@ -1850,7 +1851,7 @@
  *
  * View the current statistics with M78.
  */
-//#define PRINTCOUNTER
+#define PRINTCOUNTER
 #if ENABLED(PRINTCOUNTER)
   #define PRINTCOUNTER_SAVE_INTERVAL 60 // (minutes) EEPROM save interval during print
 #endif
@@ -2028,8 +2029,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-//#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-//#define LCD_FEEDBACK_FREQUENCY_HZ 5000
+#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
+#define LCD_FEEDBACK_FREQUENCY_HZ 5000
 
 //=============================================================================
 //======================== LCD / Controller Selection =========================
